@@ -11,7 +11,7 @@ export function GameDetails() {
 		<div>
 			<div className="container text-center">
 				<div className="card singleGameCard">
-					<img src='url' className="card-img singleGameCardimg" alt="..." />
+					<img src='https://gameranx.com/wp-content/uploads/2017/03/Cyberpunk-2077-4K-Wallpaper-3.jpg' className="card-img singleGameCardimg" alt="..." />
 					<div className="card-img-overlay">{/* <h5 className="card-title">{singleGameName}</h5> */}</div>
 				</div>
 				<p>

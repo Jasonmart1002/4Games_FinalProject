@@ -6,7 +6,7 @@ export default class Article extends Component {
 	render() {
 		const disqusShortName = "finalProject-3"; //found in your Disqus.com dashboard
 		const disqusConfig = {
-			url: "https://3000-f35affae-5763-4ad0-b985-2408c104379b.ws-us02.gitpod.io/", //this.props.pageUrl
+			url: "http://localhost:3000/", //this.props.pageUrl
 			identifier: "article-id", //this.props.uniqueId
 			title: "Title of Your Article" //this.props.title
 		};
