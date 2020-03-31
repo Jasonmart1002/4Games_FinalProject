@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import "./WelcomeJumbo.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+import keyImage from "../../images/keys.png"
+import welcomeImage from "../../images/welcome.png"
 
 export function WelcomeJumbo() {
     const [email,
@@ -11,21 +13,18 @@ export function WelcomeJumbo() {
     const [username,
         setUsername] = useState("");
 
-        
+
     return (
         <div>
             <div className="jumbotron text-center">
-                <h3 className="display-5">Welcome to Name!</h3>
-                <p className="lead">
-                    This is a simple hero unit, a simple jumbotron-style component for calling extra
-                    attention to featured content or information.
-                </p>
-                <button
-                    className="btn btn-lg ripple"
-                    href="/"
-                    data-toggle="modal"
-                    data-target="#signUpModal">
-                    Sign up
+              <img src={keyImage} className="keyimage"/>
+              <img src={welcomeImage} className="welcomeimage"/>
+              <button
+                  className="btn btn-success btn-lg ripple"
+                  href="/"
+                  data-toggle="modal"
+                  data-target="#signUpModal">
+                  Sign up
                 </button>
             </div>
             <div
