@@ -48,30 +48,30 @@ export function WelcomeJumbo() {
                         <div className="modal-body">
                             <form>
                                 <div className="form-group">
-                                    <label htmlFor="exampleInputEmail1">Username</label>
+                                    <label htmlFor="exampleInputUsername">Username</label>
                                     <input
                                         type="text"
                                         className="form-control"
-                                        id="exampleInputEmail1"
+                                        id="exampleInputUsername"
                                         aria-describedby="emailHelp"
                                         onChange={e => setUsername(e.target.value)}
                                         value={username}/>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="exampleInputPassword1">Password</label>
+                                    <label htmlFor="exampleInputPassword2">Password</label>
                                     <input
                                         type="password"
                                         className="form-control"
-                                        id="exampleInputPassword1"
+                                        id="exampleInputPassword2"
                                         onChange={e => setPassword(e.target.value)}
                                         value={password}/>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="exampleInputEmail1">Email address</label>
+                                    <label htmlFor="exampleInputEmail2">Email address</label>
                                     <input
                                         type="email"
                                         className="form-control"
-                                        id="exampleInputEmail1"
+                                        id="exampleInputEmail2"
                                         aria-describedby="emailHelp"
                                         onChange={e => setEmail(e.target.value)}
                                         value={email}/>

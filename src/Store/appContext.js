@@ -21,7 +21,7 @@ const injectContext = PassedComponent => {
 			})
 		);
 
-		
+
 
 		const saveToStore = (data) => {
 			let { store } = state;

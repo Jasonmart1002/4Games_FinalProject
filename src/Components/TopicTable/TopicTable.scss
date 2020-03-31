@@ -8,31 +8,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-
+    a {
+        text-decoration: none;
+    }
 }
-
-.gameCard {
-    width: 300px;
-    max-width: 300px;
-    min-width: 300px;
-    height: 275px;
-    margin: 23px;
-}
-
-.gameCardImg{
-    height: 200px;
-}
-
-// .favbtn {
-//     width: 40px; 
-//     height: 40px; 
-//     padding: 6px 0px; 
-//     border-radius: 30px; 
-//     font-size: 8px; 
-//     text-align: center;
-//     border: none;
-//     position: absolute;
-//     bottom: -18px;
-//     right: -18px;
-//     margin-bottom: 10px;
-// }
