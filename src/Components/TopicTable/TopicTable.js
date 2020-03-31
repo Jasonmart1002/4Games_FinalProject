@@ -18,7 +18,11 @@ export function TopicTable() {
                         gameId={game.id}
                         imageToDisplay={game.background_image}
                         clip={game.clip.clip} 
-                        gameName={game.name}/>
+                        gameName={game.name}
+                        releasedDay={game.released}
+                        rating={game.rating}
+                        ratingCount={game.ratings_count}
+                        suggestionsCount={game.suggestions_count}/>
                 </Link>
             })
 

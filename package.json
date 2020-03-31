@@ -18,6 +18,7 @@
     "react-player": "^1.15.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-star-ratings": "^2.3.0",
     "video-react": "^0.14.1"
   },
   "scripts": {

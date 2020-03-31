@@ -22,14 +22,13 @@ const injectContext = PassedComponent => {
 		);
 
 
-
 		const saveToStore = (data) => {
 			let { store } = state;
 			setState({store: {...store, games: data.results}})
 		}
 
 		useEffect(() => {
-			fetch("https://api.rawg.io/api/games?dates=2019-01-01,2019-12-31&ordering=-added")
+			fetch("https://api.rawg.io/api/games?page=2")
 				.then(response => response.json())
 				.then(data => saveToStore(data))
 				.catch((error) => console.log(error));

@@ -8,23 +8,25 @@ $borderRadius: 3px;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.616);
     transition: all 0.3s ease-in-out;
     &:hover {
-        bottom: 9px;
-        box-shadow: 4px 5px 6px rgba(19, 18, 18, 0.699);
-        background-color: rgba(27, 27, 27, 0.589);
+        bottom: 11px;
+        box-shadow: 3px 4px 4px rgba(19, 18, 18, 0.699);
+        background-color: rgb(27, 27, 27);
     }
     .gameCardInformationContainer {
+        display: flex;
         z-index: 1;
         position: absolute;
-        filter: drop-shadow( 0 0 2px rgba(250, 252, 221, 0.733));
+        filter: drop-shadow( 0 0 5px rgba(247, 248, 230, 0.733));
 
         .gameCardInnerInformation {
             width: 300px;
             height: 200px;
-            background-color: rgba(53, 53, 53, 0.856);
+            background-color: rgba(99, 99, 99, 0.719);
+            font-size: 14px;
             color: white;
             padding: 1em;
             border-radius: $borderRadius;
-            clip-path: circle(5% at 8% 11%);
+            clip-path: circle(4% at 8% 9%);
             transition: all 0.5s ease-in-out;
             cursor: pointer;
             &:hover {
@@ -32,10 +34,10 @@ $borderRadius: 3px;
             }
 
             .infoIcon {
-                font-size: 12px;
+                font-size: 10px;
                 position: relative;
-                bottom: 8px;
-                left: 5.5px;
+                bottom: 9px;
+                left: 8px;
                 color: white;
                 transition: all 0.1s ease-in-out;
             }
@@ -49,21 +51,24 @@ $borderRadius: 3px;
     .gameCard {
         width: 300px;
         height: 200px;
+        padding: none;
         background-color: rgba(46, 46, 46, 0.219);
         border-radius: $borderRadius;
-        padding: none;
-
+        overflow: hidden;
+        .nameAndRatingDetailBar {
+            position: absolute;
+            left: 192px;
+        }
     }
 
     .gameCardImg {
         box-shadow: 0 0 3px rgba(82, 81, 81, 0.952);
-        border-radius: $borderRadius;
         width: 300px;
         height: 100%;
     }
 
-    .videoPlayer {
+    .gameCardClip {
         position: relative;
+        top: 18px;
     }
-
 }

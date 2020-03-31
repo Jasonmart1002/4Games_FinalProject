@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import "./WelcomeJumbo.scss";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faTimesCircle} from '@fortawesome/free-solid-svg-icons'
 import keyImage from "../../images/keys.png"
 import welcomeImage from "../../images/welcome.png"
 
@@ -13,18 +13,17 @@ export function WelcomeJumbo() {
     const [username,
         setUsername] = useState("");
 
-
     return (
         <div>
             <div className="jumbotron text-center">
-              <img src={keyImage} className="keyimage"/>
-              <img src={welcomeImage} className="welcomeimage"/>
-              <button
-                  className="btn btn-success btn-lg ripple"
-                  href="/"
-                  data-toggle="modal"
-                  data-target="#signUpModal">
-                  Sign up
+                <img src={keyImage} className="keyimage"/>
+                <img src={welcomeImage} className="welcomeimage"/>
+                <button
+                    className="btn btn-success btn-lg ripple"
+                    href="/"
+                    data-toggle="modal"
+                    data-target="#signUpModal">
+                    Sign up
                 </button>
             </div>
             <div
