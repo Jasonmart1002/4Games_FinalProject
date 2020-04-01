@@ -1,6 +1,11 @@
 .jumbotron {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     background-color: transparent;
+    height: 20%;
     font-size: 50px;
+    padding: 0;
 }
 
 .btn-success {
@@ -12,20 +17,19 @@
     color: white;
 }
 
-.keyimage {
-  height: 45%;
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  -webkit-filter: drop-shadow(10px 10px 10px #000);
-  filter: drop-shadow(10px 10px 15px #000);
+.keyImage {
+    position: relative;
+    top:32px;
+    height: 160px;
+    width: 260px;
+    -webkit-filter: drop-shadow(10px 10px 2px #000);
+    filter: drop-shadow(20px 14px 2px #000);
 }
 
-.welcomeimage{
-  z-index: 1;
-  position: absolute;
-  height: 1000px;
-  width: 2000px;
-  top: 275px;;
-  left: -25px;
+.signUpButton {
+    position: relative;
+    top:32px;
+    .button {
+        box-shadow: 0 0 3px  #30b55c;
+    }
 }

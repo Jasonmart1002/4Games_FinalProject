@@ -3,28 +3,40 @@ import "./WelcomeJumbo.scss";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTimesCircle} from '@fortawesome/free-solid-svg-icons'
 import keyImage from "../../images/keys.png"
-import welcomeImage from "../../images/welcome.png"
 
 export function WelcomeJumbo() {
-    const [email,
-        setEmail] = useState("");
-    const [password,
-        setPassword] = useState("");
-    const [username,
-        setUsername] = useState("");
+    const [signUpValues, setSignUpValues] = useState({
+        username: null,
+        password: null,
+        confirmPassword: null
+    })
+
+    const handleSubmit = () => {
+        
+    }
+
+
+
+
+
+
+
 
     return (
         <div>
             <div className="jumbotron text-center">
-                <img src={keyImage} className="keyimage"/>
-                <img src={welcomeImage} className="welcomeimage"/>
-                <button
-                    className="btn btn-success btn-lg ripple"
-                    href="/"
-                    data-toggle="modal"
-                    data-target="#signUpModal">
-                    Sign up
-                </button>
+                <div className="signUpButton">
+                    <button
+                        className="btn btn-success btn-lg ripple"
+                        href="/"
+                        data-toggle="modal"
+                        data-target="#signUpModal">
+                        Sign up
+                    </button>
+                </div>
+                <div>
+                    <img src={keyImage} className="keyImage" alt="Disney key"/>
+                </div>
             </div>
             <div
                 className="modal fade"
@@ -44,7 +56,7 @@ export function WelcomeJumbo() {
                             </button>
                         </div>
                         <div className="modal-body">
-                            <form>
+                            <form onSubmit={handleSubmit}>
                                 <div className="form-group">
                                     <label htmlFor="exampleInputUsername">Username</label>
                                     <input
@@ -52,8 +64,8 @@ export function WelcomeJumbo() {
                                         className="form-control"
                                         id="exampleInputUsername"
                                         aria-describedby="emailHelp"
-                                        onChange={e => setUsername(e.target.value)}
-                                        value={username}/>
+                                        onChange={event => setSignUpValues({...signUpValues, username: event.target.value})}
+                                        value={signUpValues.username}/>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="exampleInputPassword2">Password</label>
@@ -61,18 +73,18 @@ export function WelcomeJumbo() {
                                         type="password"
                                         className="form-control"
                                         id="exampleInputPassword2"
-                                        onChange={e => setPassword(e.target.value)}
-                                        value={password}/>
+                                        onChange={event => setSignUpValues({...signUpValues, password: event.target.value})}
+                                        value={signUpValues.password}/>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="exampleInputEmail2">Email address</label>
+                                    <label htmlFor="exampleInputEmail2">Confirm Password</label>
                                     <input
-                                        type="email"
+                                        type="password"
                                         className="form-control"
                                         id="exampleInputEmail2"
                                         aria-describedby="emailHelp"
-                                        onChange={e => setEmail(e.target.value)}
-                                        value={email}/>
+                                        onChange={event => setSignUpValues({...signUpValues, confirmPassword: event.target.value})}
+                                        value={signUpValues.confirmPassword}/>
                                 </div>
                                 <button type="submit" className="btn btn-success">
                                     Submit

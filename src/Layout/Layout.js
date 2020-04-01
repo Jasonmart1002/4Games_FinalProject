@@ -1,4 +1,5 @@
 import React from "react";
+import './Layout.scss';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {Home} from "../Views/Home/Home";
 import {Profile} from "../Views/Profile/Profile";
@@ -9,7 +10,8 @@ import injectContext from "../Store/appContext";
 
 export const Layout = () => {
     return (
-        <div>
+        <div className="Layout">
+            <div id="bg"></div>
             <BrowserRouter>
                 <Navbar/>
                     <Switch>

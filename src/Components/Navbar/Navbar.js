@@ -24,9 +24,6 @@ export function Navbar() {
                     aria-label="Toggle navigation">
                     <FontAwesomeIcon icon={faBars} />
                 </button>
-                <Link to="/">
-                    Final Project
-                </Link>
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
@@ -65,11 +62,16 @@ export function Navbar() {
                                     Action
                                 </a>
                                 <a className="dropdown-item" href="http:#.com">
-                                    Another action
+                                    Action-adventure
                                 </a>
-                                <div className="dropdown-divider"/>
                                 <a className="dropdown-item" href="http:#.com">
-                                    Something else here
+                                    Adventure
+                                </a>
+                                <a className="dropdown-item" href="http:#.com">
+                                    Sports
+                                </a>
+                                <a className="dropdown-item" href="http:#.com">
+                                    Strategy
                                 </a>
                             </div>
                         </li>

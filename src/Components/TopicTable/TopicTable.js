@@ -29,7 +29,6 @@ export function TopicTable() {
             
             return (
                 <div className="tableContainer">
-                    <h2 className="text-center">Games Of The Day</h2>
                     <div className="gameCardBox">
                         {gameList}
                     </div>
