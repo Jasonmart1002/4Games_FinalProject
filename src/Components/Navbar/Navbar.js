@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {NavLink, Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
@@ -82,9 +82,6 @@ export function Navbar() {
                             type="search"
                             placeholder="Search"
                             aria-label="Search"/>
-                        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
-                            Search
-                        </button>
                     </form>
                 </div>
             </nav>

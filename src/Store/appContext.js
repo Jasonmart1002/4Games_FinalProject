@@ -24,7 +24,7 @@ const injectContext = PassedComponent => {
 
 		const saveToStore = (data) => {
 			let { store } = state;
-			setState({store: {...store, games: data.results}})
+			setState({store: {...store, gameData: data.results}})
 		}
 
 		useEffect(() => {

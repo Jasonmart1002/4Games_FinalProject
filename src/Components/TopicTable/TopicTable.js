@@ -8,10 +8,10 @@ export function TopicTable() {
 
     const {store} = useContext(Context);
 
-    const gameList = !store.games
+    const gameList = !store.gameData
         ? "Loading..."
         : store
-            .games
+            .gameData
             .map(game => {
                 return <Link to="/game_details" key={game.id}>
                     <GameCard 

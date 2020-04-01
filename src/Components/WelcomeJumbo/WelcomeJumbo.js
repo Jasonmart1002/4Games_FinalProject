@@ -1,23 +1,22 @@
 import React, {useState} from "react";
 import "./WelcomeJumbo.scss";
+import axios from 'axios';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTimesCircle} from '@fortawesome/free-solid-svg-icons'
 import keyImage from "../../images/keys.png"
 
 export function WelcomeJumbo() {
     const [signUpValues, setSignUpValues] = useState({
-        username: null,
-        password: null,
-        confirmPassword: null
+        username: "",
+        password: "",
+        confirmPassword: ""
     })
 
     const handleSubmit = () => {
-        
+        for(let input in signUpValues) {
+            if(input === "") {}
+        }
     }
-
-
-
-
 
 
 
