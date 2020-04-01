@@ -12,12 +12,12 @@ export function WelcomeJumbo() {
         confirmPassword: ""
     })
 
+    // Form Validation
     const handleSubmit = () => {
         for(let input in signUpValues) {
             if(input === "") {}
         }
     }
-
 
 
 
