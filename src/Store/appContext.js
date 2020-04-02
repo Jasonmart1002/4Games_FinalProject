@@ -31,7 +31,7 @@ const injectContext = PassedComponent => {
 			fetch("https://api.rawg.io/api/games?page=2")
 				.then(response => response.json())
 				.then(data => saveToStore(data))
-				.catch((error) => console.log(error));
+				.catch((error) => alert('Something went wrong try again later'));
 		}, []);
 
 		// The initial value for the context is not null anymore, but the current state of this component,
