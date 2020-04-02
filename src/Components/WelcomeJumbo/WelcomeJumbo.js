@@ -6,20 +6,36 @@ import {faTimesCircle} from '@fortawesome/free-solid-svg-icons'
 import keyImage from "../../images/keys.png"
 
 export function WelcomeJumbo() {
-    const [signUpValues, setSignUpValues] = useState({
-        username: "",
-        password: "",
-        confirmPassword: ""
-    })
+    const [signUpValues,
+        setSignUpValues] = useState({username: "", password: "", confirmPassword: ""})
 
-    // Form Validation
-    const handleSubmit = () => {
-        for(let input in signUpValues) {
-            if(input === "") {}
+    const sigUpUser = async() => {
+        const signUpData = {
+            username: signUpValues.username,
+            password: signUpValues.password
+        }
+        try {
+            console.log(signUpData)
+            const request = await axios.post('https://games-api-4geeks.herokuapp.com/sign_up', signUpData)
+            console.log(request)
+            alert(request.data.message)
+        } catch (error) {
+            alert('Sorry something went wrong try again later')
         }
     }
 
-
+    // Form Validation needs improvement
+    const handleSubmit = () => {
+        for (let input in signUpValues) {
+            if (signUpValues[input] === "") {
+                return alert(`In order to sign up please provide a valid ${input}`)
+            }
+        }
+        if (signUpValues.password !== signUpValues.confirmPassword) {
+            return alert("Password confirmation fail check spelling")
+        }
+        sigUpUser()
+    }
 
     return (
         <div>
@@ -55,7 +71,7 @@ export function WelcomeJumbo() {
                             </button>
                         </div>
                         <div className="modal-body">
-                            <form onSubmit={handleSubmit}>
+                            <form>
                                 <div className="form-group">
                                     <label htmlFor="exampleInputUsername">Username</label>
                                     <input
@@ -63,7 +79,10 @@ export function WelcomeJumbo() {
                                         className="form-control"
                                         id="exampleInputUsername"
                                         aria-describedby="emailHelp"
-                                        onChange={event => setSignUpValues({...signUpValues, username: event.target.value})}
+                                        onChange={event => setSignUpValues({
+                                        ...signUpValues,
+                                        username: event.target.value
+                                    })}
                                         value={signUpValues.username}/>
                                 </div>
                                 <div className="form-group">
@@ -72,7 +91,10 @@ export function WelcomeJumbo() {
                                         type="password"
                                         className="form-control"
                                         id="exampleInputPassword2"
-                                        onChange={event => setSignUpValues({...signUpValues, password: event.target.value})}
+                                        onChange={event => setSignUpValues({
+                                        ...signUpValues,
+                                        password: event.target.value
+                                    })}
                                         value={signUpValues.password}/>
                                 </div>
                                 <div className="form-group">
@@ -82,10 +104,17 @@ export function WelcomeJumbo() {
                                         className="form-control"
                                         id="exampleInputEmail2"
                                         aria-describedby="emailHelp"
-                                        onChange={event => setSignUpValues({...signUpValues, confirmPassword: event.target.value})}
+                                        onChange={event => setSignUpValues({
+                                        ...signUpValues,
+                                        confirmPassword: event.target.value
+                                    })}
                                         value={signUpValues.confirmPassword}/>
                                 </div>
-                                <button type="submit" className="btn btn-success">
+                                <button
+                                    type="button"
+                                    className="btn btn-success"
+                                    data-dismiss="modal"
+                                    onClick={handleSubmit}>
                                     Submit
                                 </button>
                             </form>

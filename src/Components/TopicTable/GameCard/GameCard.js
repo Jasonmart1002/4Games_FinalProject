@@ -59,7 +59,7 @@ function GameCard(props) {
                 <div className="gameCardInnerInformation">
                     <FontAwesomeIcon icon={faInfo} className="infoIcon"/>
                     <div>
-                        <p>Name: {props.gameName}</p>
+                        <h5>{props.gameName}</h5>
                         <p>Released Day: {props.releasedDay}</p>
                         <p>Ratings: {props.ratingCount}</p>
                         <p>{props.suggestionsCount} <FontAwesomeIcon icon={faThumbsUp}/></p>

@@ -1,15 +1,48 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import {NavLink} from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faBars} from '@fortawesome/free-solid-svg-icons'
+import {faTimesCircle} from '@fortawesome/free-solid-svg-icons'
+import {Context} from "../../Store/appContext";
+import axios from 'axios'
 import "./Navbar.scss";
 
 export function Navbar() {
-    const [email,
-        setEmail] = useState("");
-    const [password,
-        setPassword] = useState("");
+
+    const {store, actions} = useContext(Context);
+    const [loginInformation,
+        setLoginInformation] = useState({username: "", password: ""})
+
+        console.log(actions)
+        console.log(store)
+
+    const loginUser = async () => {
+        try {
+            const TokenRequest = await axios.post('https://games-api-4geeks.herokuapp.com/login', loginInformation)
+            console.log(TokenRequest)
+            const tokens = TokenRequest.data
+            if(!tokens) {return alert(TokenRequest.data.message)}
+            const header = {Authorization: `Bearer ${tokens.token}`}
+            const requestUserInfo = await axios.get('https://games-api-4geeks.herokuapp.com/user', {headers: header})
+            
+
+        } 
+        catch (error) {
+            console.log(error)
+            alert('Something went wrong please try again later')
+        }
+    }
+
+
+
+    const handleLogin = () => {
+        for (let input in loginInformation) {
+            if (loginInformation[input] === "") {
+                return alert(`In order to log in please provide a valid ${input}`)
+            }
+        }
+        loginUser()
+    }
 
     return (
         <div>
@@ -22,7 +55,7 @@ export function Navbar() {
                     aria-controls="navbarSupportedContent"
                     aria-expanded="false"
                     aria-label="Toggle navigation">
-                    <FontAwesomeIcon icon={faBars} />
+                    <FontAwesomeIcon icon={faBars}/>
                 </button>
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -99,20 +132,23 @@ export function Navbar() {
                                 Login
                             </h5>
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                <FontAwesomeIcon icon={faTimesCircle} />
+                                <FontAwesomeIcon icon={faTimesCircle}/>
                             </button>
                         </div>
                         <div className="modal-body">
                             <form>
                                 <div className="form-group">
-                                    <label htmlFor="exampleInputEmail1">Email address</label>
+                                    <label htmlFor="exampleInputEmail1">Username</label>
                                     <input
                                         type="email"
                                         className="form-control"
                                         id="exampleInputEmail1"
                                         aria-describedby="emailHelp"
-                                        onChange={e => setEmail(e.target.value)}
-                                        value={email}/>
+                                        onChange={event => setLoginInformation({
+                                        ...loginInformation,
+                                        username: event.target.value
+                                    })}
+                                        value={loginInformation.username}/>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="exampleInputPassword1">Password</label>
@@ -120,10 +156,17 @@ export function Navbar() {
                                         type="password"
                                         className="form-control"
                                         id="exampleInputPassword1"
-                                        onChange={e => setPassword(e.target.value)}
-                                        value={password}/>
+                                        onChange={event => setLoginInformation({
+                                        ...loginInformation,
+                                        password: event.target.value
+                                    })}
+                                        value={loginInformation.password}/>
                                 </div>
-                                <button type="submit" className="btn btn-success">
+                                <button
+                                    type="button"
+                                    className="btn btn-success"
+                                    data-dismiss="modal"
+                                    onClick={handleLogin}>
                                     Submit
                                 </button>
                             </form>

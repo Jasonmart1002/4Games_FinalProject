@@ -3,7 +3,7 @@ import "./Profile.scss";
 
 export function Profile() {
 	return (
-		<>
+		<div>
 			<div className="card profileBox text-center align-items-center pt-3 mb-4 mx-auto">
 				<div className="card-header">User Name</div>
 				<img
@@ -63,6 +63,6 @@ export function Profile() {
 					</div>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }
