@@ -23,7 +23,6 @@ export function GameDetails() {
 					<img src={game.background_image} className="card-img singleGameCardimg" alt="..." />
 				</div>
 					<p className="gameDescription" dangerouslySetInnerHTML={{ __html: game.description }}></p>
-					{/* <p>{game.description}</p> */}
 					<p>{game.released}</p>
 					<p>{game.website}</p>
 					<p>Rating: {game.rating}</p>
