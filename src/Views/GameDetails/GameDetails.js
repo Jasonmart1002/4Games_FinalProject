@@ -7,24 +7,25 @@ import Article from "../../Components/Disqus/Disqus";
 
 export function GameDetails() {
 
-	const [tasks, setTasks] = useState([]);
+	const [game, setgame] = useState([]);
 	useEffect(() => {
-		fetch("https://api.rawg.io/api/games/cyberpunk-2077")
+		fetch("https://api.rawg.io/api/games/resident-evil-2-2019")
 			.then(r => r.json())
-			.then(data => setTasks(data));
+			.then(data => setgame(data));
 	});
 
 	return (
 		<div>
 			<div className="container text-center">
+			<h1 className="gameName">{game.name}</h1>
 			<div className="card singleGameCard">
-					<img src={tasks.background_image} className="card-img singleGameCardimg" alt="..." />
+					<img src={game.background_image} className="card-img singleGameCardimg" alt="..." />
 				</div>
-					<p>{tasks.description}</p>
-					<p>{tasks.released}</p>
-					<p>{tasks.website}</p>
-					<p>Rating: {tasks.rating}</p>
-					<Article />
+					<p className="gameDescription">{game.description}</p>
+					<p>{game.released}</p>
+					<p>{game.website}</p>
+					<p>Rating: {game.rating}</p>
+					{/* <Article /> */}
 			</div>
 		</div>
 	);
