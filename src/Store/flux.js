@@ -2,9 +2,9 @@ const getState = ({getStore, getActions, setStore}) => {
     return {
 
         store: {
-			userLogin: [],
-			userTokens: [],
-            gameData: []
+			userLogin: "",
+			userTokens: "",
+            gameData: ""
         },
 
         actions: {
@@ -26,7 +26,18 @@ const getState = ({getStore, getActions, setStore}) => {
                     userLogin: userLoginInformation,
                     userTokens: tokens
                 })
+            },
+
+            logout: () => {
+                const store = getStore()
+                setStore({
+                    ...store,
+                    userLogin: "",
+                    userTokens: ""
+                })
             }
+
+            
 
         }
     }
