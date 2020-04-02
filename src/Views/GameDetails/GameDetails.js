@@ -11,10 +11,9 @@ export function GameDetails() {
 		fetch("https://api.rawg.io/api/games/resident-evil-2-2019")
 			.then(r => r.json())
 			.then(data => setgame(data));
-	});
+	},[]);
 
-const [gameDescription, setgameDescription] = useState("<h1>Hello</h1><h2>Hello</h2><p>Hello</p>");
-
+ 
 	
 	return (
 		<div>
@@ -23,11 +22,12 @@ const [gameDescription, setgameDescription] = useState("<h1>Hello</h1><h2>Hello<
 			<div className="card singleGameCard">
 					<img src={game.background_image} className="card-img singleGameCardimg" alt="..." />
 				</div>
-					<p className="gameDescription" dangerouslySetInnerHTML={{ __html: gameDescription }}></p>
+					<p className="gameDescription" dangerouslySetInnerHTML={{ __html: game.description }}></p>
+					{/* <p>{game.description}</p> */}
 					<p>{game.released}</p>
 					<p>{game.website}</p>
 					<p>Rating: {game.rating}</p>
-					{/* <Article /> */}
+					<Article />
 			</div>
 		</div>
 	);
