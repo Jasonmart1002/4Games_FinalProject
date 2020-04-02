@@ -8,22 +8,24 @@ const getState = ({getStore, getActions, setStore}) => {
         },
 
         actions: {
-            // find url to get game by Topic
-            loadSomeData: () => {
-                fetch("https://api.rawg.io/api/games?page=3")
-                    .then(response => response.json())
-                    .then(data => setStore({gameData: data.results}))
-                    .catch((error) => console.log(error))
+            // loadGameData is used in Home Component
+            loadGameData: () => {
+                fetch("https://api.rawg.io/api/games?page=2")
+				.then(response => response.json())
+				.then(data => {
+                    const store = getStore()
+                    setStore({...store,gameData: data.results})
+                })
+				.catch((error) => alert('Something went wrong try again later'))
             },
 
             saveLoginData: (userLoginInformation, tokens) => {
-				console.log('Im here')
-                // const store = getStore()
-                // setStore({
-                //     ...store,
-                //     userLogin: userLoginInformation,
-                //     userTokens: tokens
-                // })
+                const store = getStore()
+                setStore({
+                    ...store,
+                    userLogin: userLoginInformation,
+                    userTokens: tokens
+                })
             }
 
         }

@@ -9,6 +9,7 @@ import {Navbar} from "../Components/Navbar/Navbar";
 import injectContext from "../Store/appContext";
 
 export const Layout = () => {
+
     return (
         <div className="Layout">
             <div id="bg"></div>

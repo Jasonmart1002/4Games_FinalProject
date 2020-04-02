@@ -13,27 +13,20 @@ export function Navbar() {
     const [loginInformation,
         setLoginInformation] = useState({username: "", password: ""})
 
-        console.log(actions)
-        console.log(store)
 
     const loginUser = async () => {
         try {
-            const TokenRequest = await axios.post('https://games-api-4geeks.herokuapp.com/login', loginInformation)
-            console.log(TokenRequest)
-            const tokens = TokenRequest.data
-            if(!tokens) {return alert(TokenRequest.data.message)}
+            const tokenRequest = await axios.post('https://games-api-4geeks.herokuapp.com/login', loginInformation)
+            const tokens = tokenRequest.data
+            if(!tokens.token) {return alert(tokens.message)}
             const header = {Authorization: `Bearer ${tokens.token}`}
             const requestUserInfo = await axios.get('https://games-api-4geeks.herokuapp.com/user', {headers: header})
-            
-
+            actions.saveLoginData(requestUserInfo.data, tokens)
         } 
         catch (error) {
-            console.log(error)
             alert('Something went wrong please try again later')
         }
     }
-
-
 
     const handleLogin = () => {
         for (let input in loginInformation) {
