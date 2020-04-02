@@ -7,10 +7,6 @@ import GameCard from "./GameCard/GameCard"
 export function TopicTable() {
 
     const {store} = useContext(Context);
-    
-
-    
-    
 
     const gameList = !store.gameData
         ? "Loading..."
