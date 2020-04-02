@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState} from "react";
 import getState from "./flux.js";
 
 // Don't change, here is where we initialize our context, by default it's just going to be null.
@@ -8,7 +8,7 @@ export const Context = React.createContext(null);
 // https://github.com/4GeeksAcademy/react-hello-webapp/blob/master/src/js/layout.js#L35
 const injectContext = PassedComponent => {
 	const StoreWrapper = props => {
-		//this will be passed as the contenxt value
+		//this will be passed as the context value
 		const [state, setState] = useState(
 			getState({
 				getStore: () => state.store,
@@ -22,21 +22,6 @@ const injectContext = PassedComponent => {
 		);
 
 
-		const saveToStore = (data) => {
-			let { store } = state;
-			setState({store: {...store, gameData: data.results}})
-		}
-
-		useEffect(() => {
-			fetch("https://api.rawg.io/api/games?page=2")
-				.then(response => response.json())
-				.then(data => saveToStore(data))
-				.catch((error) => alert('Something went wrong try again later'));
-		}, []);
-
-		// The initial value for the context is not null anymore, but the current state of this component,
-		// the context will now have a getStore, getActions and setStore functions available, because they were declared
-		// on the state of this component
 		return (
 			<Context.Provider value={state}>
 				<PassedComponent {...props} />
