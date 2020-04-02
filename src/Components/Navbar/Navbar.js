@@ -13,16 +13,15 @@ export function Navbar() {
     const [loginInformation,
         setLoginInformation] = useState({username: "", password: ""})
 
-        actions.saveLoginData()
 
     const loginUser = async () => {
         try {
-            const TokenRequest = await axios.post('https://games-api-4geeks.herokuapp.com/login', loginInformation)
-            const tokens = TokenRequest.data
-            if(!tokens) {return alert(TokenRequest.data.message)}
+            const tokenRequest = await axios.post('https://games-api-4geeks.herokuapp.com/login', loginInformation)
+            const tokens = tokenRequest.data
+            if(!tokens.token) {return alert(tokens.message)}
             const header = {Authorization: `Bearer ${tokens.token}`}
             const requestUserInfo = await axios.get('https://games-api-4geeks.herokuapp.com/user', {headers: header})
-        
+            actions.saveLoginData(requestUserInfo.data, tokens)
         } 
         catch (error) {
             alert('Something went wrong please try again later')

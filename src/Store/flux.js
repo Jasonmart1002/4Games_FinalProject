@@ -8,7 +8,7 @@ const getState = ({getStore, getActions, setStore}) => {
         },
 
         actions: {
-            // find url to get game by Topic
+            // loadGameData is used in Home Component
             loadGameData: () => {
                 fetch("https://api.rawg.io/api/games?page=2")
 				.then(response => response.json())
@@ -20,13 +20,12 @@ const getState = ({getStore, getActions, setStore}) => {
             },
 
             saveLoginData: (userLoginInformation, tokens) => {
-				console.log('Im here')
-                // const store = getStore()
-                // setStore({
-                //     ...store,
-                //     userLogin: userLoginInformation,
-                //     userTokens: tokens
-                // })
+                const store = getStore()
+                setStore({
+                    ...store,
+                    userLogin: userLoginInformation,
+                    userTokens: tokens
+                })
             }
 
         }

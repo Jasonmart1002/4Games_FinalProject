@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext} from "react";
 import "./TopicTable.scss";
 import {Link} from "react-router-dom";
 import {Context} from "../../Store/appContext";
@@ -6,12 +6,10 @@ import GameCard from "./GameCard/GameCard"
 
 export function TopicTable() {
 
-    const {store, actions} = useContext(Context);
-    const{loadGameData} = actions
+    const {store} = useContext(Context);
+    
 
-    useEffect(() => {
-        loadGameData()
-    },[loadGameData])
+    
     
 
     const gameList = !store.gameData
