@@ -4,7 +4,9 @@ import Article from "../../Components/Disqus/Disqus";
 import {Context} from "../../Store/appContext";
 
 
-export function GameDetails() {
+export function GameDetails(props) {
+
+	const gameToSearch = props.match.params.slug
 
 	const [game, setgame] = useState([]);
 	const {store, actions} = useContext(Context);
@@ -24,13 +26,11 @@ export function GameDetails() {
 	// };
 
 	useEffect(() => {
-		fetch("https://api.rawg.io/api/games/resident-evil-2-2019")
+		fetch(`https://api.rawg.io/api/games/${gameToSearch}`)
 			.then(r => r.json())
 			.then(data => setgame(data));
 	},[]);
 
- 
-	
 	return (
 		<div>
 			<div className="container text-center">

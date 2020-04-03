@@ -6,10 +6,11 @@ import {Context} from "../../Store/appContext";
 
 export function Profile(props) {
 
+
 	const {store} = useContext(Context);
 	const {userLogin} = store
 	const {history} = props
-	
+
 	useEffect(() => {
 		if(!userLogin){
 			history.push('/')
