@@ -4,12 +4,12 @@ import Article from "../../Components/Disqus/Disqus";
 import {Context} from "../../Store/appContext";
 
 
-export function GameDetails() {
+export function GameDetails(props) {
 
-	const [game, setgame] = useState([]);
+	const gameToSearch =props.match.params.slug;
+	const [game, setGame] = useState([]);
 	const {store, actions} = useContext(Context);
 	const [favCards, setFavCards] = useState([]);
-	const [rmvFav, setRmvFav] = useState(favCards);
 
 	const addToFav = val => {
 		const newFavs = [...store.favoriteGames];
@@ -17,16 +17,10 @@ export function GameDetails() {
 		setFavCards(newFavs);
 	};
 
-	// const deleteLabel = val => {
-	// 	const newestFavs = [...rmvFav];
-	// 	newestFavs.splice(val, 1);
-	// 	setFavCards(newestFavs);
-	// };
-
 	useEffect(() => {
-		fetch("https://api.rawg.io/api/games/resident-evil-2-2019")
+		fetch(`https://api.rawg.io/api/games/${gameToSearch}`)
 			.then(r => r.json())
-			.then(data => setgame(data));
+			.then(data => setGame(data));
 	},[]);
 
  
@@ -49,9 +43,10 @@ export function GameDetails() {
 				</button>
 
 					<p className="gameDescription" dangerouslySetInnerHTML={{ __html: game.description }}></p>
-					<p>{game.released}</p>
-					<p>{game.website}</p>
-					<p>Rating: {game.rating}</p>
+					<p className="detailTxt">Release Date: {game.released}</p>
+					<p className="detailTxt">Website: {game.website}</p>
+					<p className="detailTxt">Rating: {game.rating}</p>
+
 					<Article />
 			</div>
 		</div>
