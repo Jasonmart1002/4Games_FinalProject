@@ -1,12 +1,21 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import "./Profile.scss";
 import GameCard from "../../Components/TopicTable/GameCard/GameCard"
 import {Link} from "react-router-dom";
 import {Context} from "../../Store/appContext";
 
-export function Profile() {
+export function Profile(props) {
 
 	const {store} = useContext(Context);
+	const {userLogin} = store
+	const {history} = props
+	
+	useEffect(() => {
+		if(!userLogin){
+			history.push('/')
+		}
+	}, [userLogin,history])
+
 
     const favoriteList = !store.favoriteGames
         ? "Loading..."

@@ -16,7 +16,6 @@ function GameCard(props) {
 
     const handleMouseEvent = (mouseAction) => {
         if (mouseAction) {
-            console.log(props.clip)
             if(!props.clip) {
                 setUserView({...userView,
                     contentToDisplay:(
