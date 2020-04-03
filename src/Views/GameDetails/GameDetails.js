@@ -1,11 +1,27 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect,useContext} from "react";
 import "./GameDetails.scss";
 import Article from "../../Components/Disqus/Disqus";
+import {Context} from "../../Store/appContext";
 
 
 export function GameDetails() {
 
 	const [game, setgame] = useState([]);
+	const {store, actions} = useContext(Context);
+	const [favCards, setFavCards] = useState([]);
+	const [rmvFav, setRmvFav] = useState(favCards);
+
+	const addToFav = val => {
+		const newFavs = [...store.favoriteGames];
+		newFavs.push(val);
+		setFavCards(newFavs);
+	};
+
+	// const deleteLabel = val => {
+	// 	const newestFavs = [...rmvFav];
+	// 	newestFavs.splice(val, 1);
+	// 	setFavCards(newestFavs);
+	// };
 
 	useEffect(() => {
 		fetch("https://api.rawg.io/api/games/resident-evil-2-2019")
@@ -22,6 +38,16 @@ export function GameDetails() {
 			<div className="card singleGameCard">
 					<img src={game.background_image} className="card-img singleGameCardimg" alt="..." />
 				</div>
+				<button
+					type="button"
+					onClick={() => {
+						addToFav(game);
+						console.log({ favCards });
+					}}
+					className="btn btn-primary btn-sm">
+					Favorite
+				</button>
+
 					<p className="gameDescription" dangerouslySetInnerHTML={{ __html: game.description }}></p>
 					<p>{game.released}</p>
 					<p>{game.website}</p>

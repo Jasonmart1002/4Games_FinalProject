@@ -7,7 +7,8 @@ const getState = ({getStore, getActions, setStore}) => {
         store: {
 			userLogin: "",
 			userTokens: "",
-            gameData: ""
+            gameData: "",
+            favoriteGames: ""
         },
 
         actions: {
