@@ -8,7 +8,6 @@ import "./Navbar.scss";
 
 export function Navbar(props) {
 
-
     const {store, actions} = useContext(Context);
     const [loginInformation,
         setLoginInformation] = useState({username: "", password: ""})
