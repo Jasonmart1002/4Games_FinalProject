@@ -34,8 +34,21 @@ function Navbar(props) {
         loginUser()
     }
 
-    const loginButtonHandler = () => {
+    const handleSearch = (event) => {
+        const value = event.target.value;
+        if(!value){ return null }
+        if(event.key === 'Enter') {
+            props.history.push(`/game_details/${value}`)
+        }
+    }
 
+    const loadNewGame = (genre) => {
+        const loadGenres = `genres=${genre}`
+        actions.loadGameData(loadGenres)
+    }
+
+
+    const loginButtonHandler = () => {
         if (!store.userLogin) {
             return (
                 <li className="nav-item">
@@ -59,7 +72,7 @@ function Navbar(props) {
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false">
-                        <FontAwesomeIcon icon={faUserCircle} />
+                        <FontAwesomeIcon icon={faUserCircle} style={{color:"rgb(255, 255, 255)"}}/>
                     </Link>
                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                         <Link className="dropdown-item" to={`/profile/${loginInformation.username}`}>
@@ -108,21 +121,21 @@ function Navbar(props) {
                                 Genres
                             </a>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a className="dropdown-item" href="http:#.com">
+                                <Link className="dropdown-item" to="/" onClick={() => loadNewGame('action')}>
                                     Action
-                                </a>
-                                <a className="dropdown-item" href="http:#.com">
-                                    Action-adventure
-                                </a>
-                                <a className="dropdown-item" href="http:#.com">
+                                </Link>
+                                <Link className="dropdown-item" to="/" onClick={() => loadNewGame('puzzle')}>
+                                    Puzzle
+                                </Link>
+                                <Link className="dropdown-item" to="/" onClick={() => loadNewGame('adventure')}>
                                     Adventure
-                                </a>
-                                <a className="dropdown-item" href="http:#.com">
+                                </Link>
+                                <Link className="dropdown-item" to="/" onClick={() => loadNewGame('sports')}>
                                     Sports
-                                </a>
-                                <a className="dropdown-item" href="http:#.com">
+                                </Link>
+                                <Link className="dropdown-item" to="/" onClick={() => loadNewGame('strategy')}>
                                     Strategy
-                                </a>
+                                </Link>
                             </div>
                         </li>
                         {loginButtonHandler()}
@@ -132,7 +145,8 @@ function Navbar(props) {
                             className="form-control mr-sm-2"
                             type="search"
                             placeholder="Search"
-                            aria-label="Search"/>
+                            aria-label="Search"
+                            onKeyDown={(event) => {handleSearch(event)}}/>
                     </form>
                 </div>
             </nav>

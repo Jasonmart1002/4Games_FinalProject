@@ -13,13 +13,12 @@ const getState = ({getStore, getActions, setStore}) => {
 
         actions: {
             // loadGameData is used in Home Component
-            loadGameData: () => {
-                fetch("https://api.rawg.io/api/games?page=2")
+            loadGameData: (game_url_to_fetch = "page=1") => {
+                const store = getStore()
+                setStore({...store,gameData: ""})
+                fetch(`https://api.rawg.io/api/games?${game_url_to_fetch}`)
 				.then(response => response.json())
-				.then(data => {
-                    const store = getStore()
-                    setStore({...store,gameData: data.results})
-                })
+				.then(data => {setStore({...store,gameData: data.results})})
 				.catch((error) => alert('Something went wrong try again later'))
             },
 

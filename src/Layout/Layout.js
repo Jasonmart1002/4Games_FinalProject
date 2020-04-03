@@ -17,7 +17,7 @@ export const Layout = () => {
                 <Navbar/>
                     <Switch>
                         <Route path="/profile/:username" component={Profile}/>
-                        <Route path="/game_details" component={GameDetails}/>
+                        <Route path="/game_details/:slug" component={GameDetails}/>
                         <Route exact path="/" component={Home}/>
                         <Route render={() => <h1>Not found!</h1>}/>
                     </Switch>

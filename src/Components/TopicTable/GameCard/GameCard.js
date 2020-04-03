@@ -3,6 +3,7 @@ import './GameCard.scss';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faInfo} from '@fortawesome/free-solid-svg-icons';
 import {faThumbsUp} from '@fortawesome/free-solid-svg-icons';
+import {faSadTear} from '@fortawesome/free-solid-svg-icons';
 import StarRatings from 'react-star-ratings';
 import ReactPlayer from 'react-player';
 
@@ -15,18 +16,27 @@ function GameCard(props) {
 
     const handleMouseEvent = (mouseAction) => {
         if (mouseAction) {
-            setUserView({
-                ...userView,
-                contentToDisplay: (<ReactPlayer
-                    url={props.clip}
-                    className="gameCardClip"
-                    width='100%'
-                    height='100%'
-                    playing
-                    loop
-                    volume={0}
-                    muted/>)
-            })
+            if(!props.clip) {
+                setUserView({...userView,
+                    contentToDisplay:(
+                        <div className="videoUnavailable">
+                            <FontAwesomeIcon icon={faSadTear} className="sadIcon"/>
+                        </div>
+                    )})
+            } else {
+                setUserView({
+                    ...userView,
+                    contentToDisplay: (<ReactPlayer
+                        url={props.clip.clip}
+                        className="gameCardClip"
+                        width='100%'
+                        height='100%'
+                        playing
+                        loop
+                        volume={0}
+                        muted/>)
+                })
+            }
             setGameRatingToDisplay({
                 ...gameRatingToDisplay,
                 gameRating: (<StarRatings
@@ -36,6 +46,9 @@ function GameCard(props) {
                     starEmptyColor="rgba(153, 153, 153, 0.568)"
                     starRatedColor="rgb(255, 255, 255)"/>)
             })
+
+
+
 
         } else {
             setUserView({

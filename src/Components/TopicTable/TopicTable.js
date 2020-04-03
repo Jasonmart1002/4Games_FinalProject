@@ -7,17 +7,16 @@ import GameCard from "./GameCard/GameCard"
 export function TopicTable() {
 
     const {store} = useContext(Context);
-
     const gameList = !store.gameData
-        ? "Loading..."
+        ? <div className="loader"></div>
         : store
             .gameData
             .map(game => {
-                return <Link to="/game_details" key={game.id}>
-                    <GameCard 
+                return <Link to={`/game_details/${game.slug}`} key={game.id}>
+                    <GameCard
                         gameId={game.id}
                         imageToDisplay={game.background_image}
-                        clip={game.clip.clip} 
+                        clip={game.clip}
                         gameName={game.name}
                         releasedDay={game.released}
                         rating={game.rating}
@@ -26,12 +25,11 @@ export function TopicTable() {
                 </Link>
             })
 
-            
-            return (
-                <div className="tableContainer">
-                    <div className="gameCardBox">
-                        {gameList}
-                    </div>
-                </div>
-            );
-        }
+    return (
+        <div className="tableContainer">
+            <div className="gameCardBox">
+                {gameList}
+            </div>
+        </div>
+    );
+}
