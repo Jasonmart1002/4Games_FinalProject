@@ -4,31 +4,21 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faBars} from '@fortawesome/free-solid-svg-icons'
 import {faTimesCircle} from '@fortawesome/free-solid-svg-icons'
 import {Context} from "../../Store/appContext";
-import axios from 'axios'
 import "./Navbar.scss";
 
-export function Navbar() {
+export function Navbar(props) {
 
-    const {actions} = useContext(Context);
+
+    const {store, actions} = useContext(Context);
     const [loginInformation,
         setLoginInformation] = useState({username: "", password: ""})
 
     const loginUser = async() => {
-        try {
-            const tokenRequest = await axios.post('https://games-api-4geeks.herokuapp.com/login', loginInformation)
-            const tokens = tokenRequest.data
-            if (!tokens.token) {
-                return alert(tokens.message)
-            }
-            const header = {
-                Authorization: `Bearer ${tokens.token}`
-            }
-            console.log(header)
-            const requestUserInfo = await axios.get('https://games-api-4geeks.herokuapp.com/user', {headers: header})
-            actions.saveLoginData(requestUserInfo.data, tokens)
-        } catch (error) {
-            alert('Something went wrong please try again later')
-        }
+        actions.login(loginInformation)
+    }
+
+    const logoutUser = () => {
+        actions.logout()
     }
 
     const handleLogin = () => {
@@ -40,19 +30,13 @@ export function Navbar() {
         loginUser()
     }
 
-    const logoutUser = () => {
-        actions.logout()
-    }
-
-console.log(store)
-
 const loginButtonHandler = () => {
 
-    if (store.userLogin === "") {
+    if (!store.userLogin) {
         return (
             <NavLink
                 className="nav-link ripple"
-                to="/profile/:username"
+                to="/"
                 data-toggle="modal"
                 data-target="#exampleModalCenter">
                 Login
