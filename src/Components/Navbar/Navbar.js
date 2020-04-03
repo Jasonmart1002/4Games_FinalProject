@@ -37,8 +37,9 @@ function Navbar(props) {
     const handleSearch = (event) => {
         const value = event.target.value;
         if(!value){ return null }
+        let replaced = value.split(' ').join('-');
         if(event.key === 'Enter') {
-            props.history.push(`/game_details/${value}`)
+            props.history.push(`/game_details/${replaced}`)
         }
     }
 
