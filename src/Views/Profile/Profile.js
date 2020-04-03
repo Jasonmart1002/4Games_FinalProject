@@ -1,7 +1,31 @@
-import React from "react";
+import React, {useContext} from "react";
 import "./Profile.scss";
+import GameCard from "../../Components/TopicTable/GameCard/GameCard"
+import {Link} from "react-router-dom";
+import {Context} from "../../Store/appContext";
 
 export function Profile() {
+
+	const {store} = useContext(Context);
+
+    const favoriteList = !store.favoriteGames
+        ? "Loading..."
+        : store
+            .favoriteGames
+            .map(game => {
+                return <Link to="/game_details" key={game.id}>
+                    <GameCard 
+                        gameId={game.id}
+                        imageToDisplay={game.background_image}
+                        clip={game.clip.clip} 
+                        gameName={game.name}
+                        releasedDay={game.released}
+                        rating={game.rating}
+                        ratingCount={game.ratings_count}
+                        suggestionsCount={game.suggestions_count}/>
+                </Link>
+			})
+			
 	return (
 		<div>
 			<div className="card profileBox text-center align-items-center pt-3 mb-4 mx-auto">
@@ -18,51 +42,11 @@ export function Profile() {
 					</p>
 				</div>
 			</div>
-			<div className="container profileContainer">
-				<h2 className="text-center">Favorite Games</h2>
-				<div className="card-deck profileCardDeck">
-					<div className="card gameCard hover">
-						<img
-							src="https://static-cdn.jtvnw.net/ttv-boxart/League%20of%20Legends.jpg"
-							className="card-img gameCard"
-							alt="..."
-						/>
-						<div className="card-img-overlay" />
-					</div>
-					<div className="card gameCard hover">
-						<img
-							src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5f/Tf2_standalonebox.jpg/220px-Tf2_standalonebox.jpg"
-							className="card-img gameCard"
-							alt="..."
-						/>
-						<div className="card-img-overlay" />
-					</div>
-					<div className="card gameCard hover">
-						<img
-							src="https://ubistatic19-a.akamaihd.net/ubicomstatic/en-us/global/game-info/ac1_nakedbox_mobile_164648.jpg"
-							className="card-img gameCard"
-							alt="..."
-						/>
-						<div className="card-img-overlay" />
-					</div>
-					<div className="card gameCard hover">
-						<img
-							src="https://store-images.s-microsoft.com/image/apps.13587.70644597693904836.cde9dd08-509f-4054-8190-24728e59ad5e.b122adbd-e812-41be-bc09-4dd7b0078036?mode=scale&q=90&h=300&w=200"
-							className="card-img gameCard"
-							alt="..."
-						/>
-						<div className="card-img-overlay" />
-					</div>
-					<div className="card gameCard hover">
-						<img
-							src="https://www.residentevil.com/_asset/images/re2-panel.jpg"
-							className="card-img gameCard"
-							alt="..."
-						/>
-						<div className="card-img-overlay" />
-					</div>
-				</div>
-			</div>
+			<div className="tableContainer">
+                    <div className="gameCardBox">
+                        {favoriteList}
+                    </div>
+                </div>
 		</div>
 	);
 }
