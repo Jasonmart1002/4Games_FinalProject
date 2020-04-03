@@ -8,7 +8,7 @@ import {Context} from "../../Store/appContext";
 
 export const Home = () => {
 
-    const {actions} = useContext(Context);
+    const {actions, store} = useContext(Context);
 	const{loadGameData} = actions;
 
 	useEffect(() => {
@@ -18,7 +18,7 @@ export const Home = () => {
 
 	return (
 	<div>
-		<WelcomeJumbo />
+		<WelcomeJumbo user={store.userLogin}/>
 		<TopicTable />
 	</div>)
 };

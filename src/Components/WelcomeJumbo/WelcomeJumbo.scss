@@ -29,7 +29,11 @@
 .signUpButton {
     position: relative;
     top:32px;
-    .button {
-        box-shadow: 0 0 3px  #30b55c;
+    .buttonShadow {
+        box-shadow: 0 0 4px #fff; 
     }
+}
+
+.hidden {
+    visibility: hidden;
 }

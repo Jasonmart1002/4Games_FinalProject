@@ -5,7 +5,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTimesCircle} from '@fortawesome/free-solid-svg-icons'
 import keyImage from "../../images/keys.png"
 
-export function WelcomeJumbo() {
+export function WelcomeJumbo(props) {
+
     const [signUpValues,
         setSignUpValues] = useState({username: "", password: "", confirmPassword: ""})
 
@@ -37,12 +38,16 @@ export function WelcomeJumbo() {
         sigUpUser()
     }
 
+    const buttonClassAssignment = !props.user
+        ? "btn btn-success btn-lg buttonShadow ripple"
+        : "hidden"
+
     return (
         <div>
             <div className="jumbotron text-center">
                 <div className="signUpButton">
                     <button
-                        className="btn btn-success btn-lg ripple"
+                        className={buttonClassAssignment}
                         href="/"
                         data-toggle="modal"
                         data-target="#signUpModal">
