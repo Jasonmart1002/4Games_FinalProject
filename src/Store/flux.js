@@ -35,6 +35,7 @@ const getState = ({getStore, getActions, setStore}) => {
                         userLogin: requestUserInfo,
                         userTokens: tokens
                     })
+                    return requestUserInfo.data.username
                 } catch (error) {
                     alert('Something went wrong please try again later')
                 }

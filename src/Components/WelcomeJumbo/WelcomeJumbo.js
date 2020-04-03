@@ -39,8 +39,8 @@ export function WelcomeJumbo(props) {
     }
 
     const buttonClassAssignment = !props.user
-        ? "btn btn-success btn-lg ripple"
-        : "btn btn-success btn-lg ripple hidden"
+        ? "btn btn-success btn-lg buttonShadow ripple"
+        : "hidden"
 
     return (
         <div>
