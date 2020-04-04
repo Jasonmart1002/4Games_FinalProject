@@ -8,22 +8,25 @@ export function Profile(props) {
     const {userLogin} = store
     const {history} = props
 
-    // useEffect(() => {
-    //     if (!userLogin) {
-    //         history.push('/')
-    //     }
-	// },[userLogin, history])
+    useEffect(() => {
+        if (!userLogin) {
+            history.push('/')
+        }
+	},[userLogin, history])
 	
-	
-
     return (
 		<div className="userProfileMain">
 			<div className="profileContainer">
 				<div className="leftContainer">
+					user favoriteGame
 				</div>
 				<div className="rightContainer">
-					<div className="favoriteGame"></div>
-					<div className="newRelease"></div>
+					<div className="favoriteGame">
+						user info
+					</div>
+					<div className="newRelease">
+						message
+					</div>
 				</div>
 			</div>
 		</div>
