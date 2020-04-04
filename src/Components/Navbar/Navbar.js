@@ -12,10 +12,13 @@ function Navbar(props) {
     const {store, actions} = useContext(Context);
     const [loginInformation,
         setLoginInformation] = useState({username: "", password: ""})
+    const [spinnerClass, setSpinnerClass] = useState('hidden')
 
 
     const loginUser = async() => {
+        setSpinnerClass('visible')
         const username = await actions.login(loginInformation)
+        setSpinnerClass('hidden')
         props
             .history
             .push(`/profile/${username}`)
@@ -140,6 +143,11 @@ function Navbar(props) {
                             </div>
                         </li>
                         {loginButtonHandler()}
+                        <li className={`nav-item ${spinnerClass}`}>
+                            <NavLink to="/" exact className="nav-link ripple">
+                                <div className="loader_2"></div>
+                            </NavLink>
+                        </li>
                     </ul>
                     <form className="form-inline my-2 my-lg-0">
                         <input
