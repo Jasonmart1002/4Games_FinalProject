@@ -23,8 +23,6 @@ export function GameDetails(props) {
 			.then(data => setGame(data));
 	},[]);
 
- 
-	
 	return (
 		<div>
 			<div className="container text-center">
