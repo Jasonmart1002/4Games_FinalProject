@@ -146,6 +146,7 @@ function Navbar(props) {
                             className="form-control mr-sm-2"
                             type="search"
                             placeholder="Search"
+                            id="search"
                             aria-label="Search"
                             onKeyDown={(event) => {handleSearch(event)}}/>
                     </form>
