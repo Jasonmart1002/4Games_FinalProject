@@ -17,11 +17,8 @@ function Navbar(props) {
 
     const loginUser = async() => {
         setSpinnerClass('visible')
-        const username = await actions.login(loginInformation)
+        await actions.login(loginInformation)
         setSpinnerClass('hidden')
-        props
-            .history
-            .push(`/profile/${username}`)
     }
 
     const logoutUser = () => {

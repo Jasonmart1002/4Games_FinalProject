@@ -1,52 +1,95 @@
-import React, {useState, useEffect,useContext} from "react";
+import React, {useState, useEffect} from "react";
 import "./GameDetails.scss";
 import Article from "../../Components/Disqus/Disqus";
-import {Context} from "../../Store/appContext";
-
+import StarRatings from 'react-star-ratings';
+import ReactPlayer from 'react-player';
+import FollowButton from "../../Components/FollowButton/FollowButton"
 
 export function GameDetails(props) {
 
-	const gameToSearch =props.match.params.slug;
-	const [game, setGame] = useState([]);
-	const {store, actions} = useContext(Context);
-	const [favCards, setFavCards] = useState([]);
+    const gameToSearch = props.match.params.slug;
+    const [game,
+        setGame] = useState([]);
+    const [userView,
+        setUserView] = useState({contentToDisplay: (
+            <div className="spinnerContainer">
+                <div className="loader_3"></div>
+            </div>
+        )})
+        
+    const updateState = (data) => {
+        setGame(data)
+        if (!data.clip) {
+            return setUserView({contentToDisplay: (<img
+                src={data.background_image}
+                className="card-img gameCardImg"
+                alt={data.name}/>)})
+        }
+        setUserView({contentToDisplay: (<ReactPlayer
+            url={data.clip.clip}
+            width='100%'
+            height='100%'
+            controls
+            loop
+            playing
+            volume={0}/>)}) //set up to 0.002 when finish development
+    }
 
-	const addToFav = val => {
-		const newFavs = [...store.favoriteGames];
-		newFavs.push(val);
-		setFavCards(newFavs);
-	};
+    useEffect(() => {
+        fetch(`https://api.rawg.io/api/games/${gameToSearch}`)
+            .then(response => response.json())
+            .then(data => updateState(data))
+    }, [gameToSearch]);
 
-	useEffect(() => {
-		fetch(`https://api.rawg.io/api/games/${gameToSearch}`)
-			.then(r => r.json())
-			.then(data => setGame(data));
-	},[]);
-
-	return (
-		<div>
-			<div className="container text-center">
-			<h1 className="gameName">{game.name}</h1>
-			<div className="card singleGameCard">
-					<img src={game.background_image} className="card-img singleGameCardimg" alt="..." />
-				</div>
-				<button
-					type="button"
-					onClick={() => {
-						addToFav(game);
-						console.log({ favCards });
-					}}
-					className="btn btn-primary btn-sm">
-					Favorite
-				</button>
-
-					<p className="gameDescription" dangerouslySetInnerHTML={{ __html: game.description }}></p>
-					<p className="detailTxt">Release Date: {game.released}</p>
-					<p className="detailTxt">Website: {game.website}</p>
-					<p className="detailTxt">Rating: {game.rating}</p>
-
-					<Article />
-			</div>
-		</div>
-	);
+    return (
+        <div>
+            <div className="gameDetailsMain">
+                <div className="detailsContainer">
+                    <div className="leftContainer">
+                        <div className="gameDetailsVideo">
+                            {userView.contentToDisplay}
+                        </div>
+                        <div className="gameDetailsFollowButtonContainer">
+                                <FollowButton game_id={game.id} game_name={game.name} />
+                        </div>
+                        <div className="disqusContainer">
+                            <div className="disqus">
+                                <Article articleId ={game.slug} articleTitle={game.name}/>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="rightContainer">
+                        <div className="description">
+                            <div>
+                                <h2 className="gameName">{game.name}</h2>
+                            </div>
+                            <div className="gameDetailsStarRating">
+                                <StarRatings
+                                    rating={game.rating}
+                                    starDimension="17px"
+                                    starSpacing="3px"
+                                    starEmptyColor="rgba(153, 153, 153, 0.568)"
+                                    starRatedColor="rgb(253, 204, 13)"/>
+                            </div>
+                            <div className="gameDescription">
+                                <p
+                                    dangerouslySetInnerHTML={{
+                                    __html: game.description
+                                }}></p>
+                                <div className="descriptionDetails">
+                                    <p className="detailTxt">Release Date: {game.released}</p>
+                                    <a
+                                        href={game.website}
+                                        rel="noopener noreferrer"
+                                        target="_blank"
+                                        className="detailTxt">{game.website}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }

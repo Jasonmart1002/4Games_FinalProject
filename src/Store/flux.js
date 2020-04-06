@@ -8,7 +8,6 @@ const getState = ({getStore, getActions, setStore}) => {
 			userLogin: "",
 			userTokens: "",
             gameData: "",
-            favoriteGames: ""
         },
 
         actions: {
@@ -20,6 +19,22 @@ const getState = ({getStore, getActions, setStore}) => {
 				.then(response => response.json())
 				.then(data => {setStore({...store,gameData: data.results})})
 				.catch((error) => alert('Something went wrong try again later'))
+            },
+
+            // set up a filter to see if the token still valid
+            updateUser: async() => {
+                try {
+                    const store = getStore()
+                    const tokens = store.userTokens
+                    const header = {Authorization: `Bearer ${tokens.token}`}
+                    const requestUserInfo = await axios.get('https://games-api-4geeks.herokuapp.com/user', {headers: header})
+                    setStore({
+                        ...store,
+                        userLogin: requestUserInfo,
+                    })
+                } catch (error) {
+                    alert('Something went wrong please try again later')
+                }
             },
 
             login: async(loginInformation) => {

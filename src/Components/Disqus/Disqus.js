@@ -1,24 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
+import {withRouter} from 'react-router-dom'
 import Disqus from "disqus-react";
 import "./Disqus.scss";
 
-export default class Article extends Component {
-	render() {
-		const disqusShortName = "finalProject-3"; //found in your Disqus.com dashboard
-		const disqusConfig = {
-			url: "http://localhost:3000/", //this.props.pageUrl
-			identifier: "article-id", //this.props.uniqueId
-			title: "Title of Your Article" //this.props.title
-		};
-
-		return (
-			<div className="article-container">
-				<h1>League Of Legends</h1>
-
-				<p>Talk about this game!</p>
-
-				<Disqus.DiscussionEmbed shortName={disqusShortName} config={disqusConfig} />
-			</div>
-		);
-	}
+function Article(props) {
+    const disqusShortName = "game-forum"; 
+    const disqusConfig = {
+        url: `http://localhost:3000${props.location.pathname}`, 
+        identifier: props.articleId,
+        title: props.articleTitle
+	};
+    return (
+        <div>
+            <Disqus.DiscussionEmbed shortname={disqusShortName} config={disqusConfig}/>
+        </div>
+    );
 }
+export default withRouter(Article) 

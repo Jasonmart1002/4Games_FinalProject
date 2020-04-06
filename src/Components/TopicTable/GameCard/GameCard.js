@@ -46,10 +46,7 @@ function GameCard(props) {
                     starEmptyColor="rgba(153, 153, 153, 0.568)"
                     starRatedColor="rgb(255, 255, 255)"/>)
             })
-
-
-
-
+            
         } else {
             setUserView({
                 ...userView,
