@@ -9,7 +9,7 @@ export function Error404() {
 				<h1>404</h1>
 				<h2>Page not found</h2>
 			</div>
-			<Link to="/"><a>Homepage</a></Link>
+			{/* <Link to="/"><a>Homepage</a></Link> */}
 		</div>
 	</div>
     );

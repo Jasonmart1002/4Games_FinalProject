@@ -5,7 +5,7 @@ import {Home} from "../Views/Home/Home";
 import {Profile} from "../Views/Profile/Profile";
 import {GameDetails} from "../Views/GameDetails/GameDetails";
 import {Footer} from "../Components/Footer/Footer";
-// import {Error404} from "../Components/404.js";
+import {Error404} from "../Components/404/404";
 import Navbar from "../Components/Navbar/Navbar";
 import injectContext from "../Store/appContext";
 
@@ -20,7 +20,7 @@ export const Layout = () => {
                         <Route path="/profile/:username" component={Profile}/>
                         <Route path="/game_details/:slug" component={GameDetails}/>
                         <Route exact path="/" component={Home}/>
-                        <Route render={() => <h1>Not found!</h1>}/>
+                        <Route component={Error404}/>
                     </Switch>
                 <Footer/>
             </BrowserRouter>
