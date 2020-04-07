@@ -3,7 +3,8 @@ import "./GameDetails.scss";
 import Article from "../../Components/Disqus/Disqus";
 import StarRatings from 'react-star-ratings';
 import ReactPlayer from 'react-player';
-import FollowButton from "../../Components/FollowButton/FollowButton"
+import FollowButton from "../../Components/FollowButton/FollowButton";
+import Media from "../../Components/Youtube/Media";
 
 export function GameDetails(props) {
 
@@ -42,7 +43,7 @@ export function GameDetails(props) {
     }, [gameToSearch]);
 
     return (
-        <div>
+        <div className="gameDetailsComponent">
             <div className="gameDetailsMain">
                 <div className="detailsContainer">
                     <div className="leftContainer">
@@ -50,6 +51,7 @@ export function GameDetails(props) {
                             {userView.contentToDisplay}
                         </div>
                         <div className="gameDetailsFollowButtonContainer">
+                                <Media game_name={game.name}/>
                                 <FollowButton game_id={game.id} game_name={game.name} />
                         </div>
                         <div className="disqusContainer">

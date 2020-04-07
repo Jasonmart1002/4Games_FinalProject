@@ -63,7 +63,7 @@ $tablet: "(min-width: 368px) and (max-width: 1170px)";
             z-index: 1;
             .gameDetailsVideo {
                 background-color: rgb(0, 0, 0);
-                height: 35%;
+                height: 36%;
                 width: 100%;
                 border-radius: 12px;
                 box-shadow: 0 1px 2px black;
@@ -78,9 +78,9 @@ $tablet: "(min-width: 368px) and (max-width: 1170px)";
             }
             .gameDetailsFollowButtonContainer {
                 display: flex;
-                justify-content: flex-end;
+                justify-content: space-between;
                 align-items: center;
-                height: 5%;
+                height: 4%;
                 padding: 0 20px 0 20px;
                 margin-top: 12px;
             }
@@ -90,7 +90,7 @@ $tablet: "(min-width: 368px) and (max-width: 1170px)";
                 width: 100%;
                 padding: 5px 20px 20px 20px;
                 border-radius: 12px;
-                margin-top: 12px;
+                
                 overflow: scroll;
                 .disqus {
                     height: 100%;
