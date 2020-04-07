@@ -12,8 +12,8 @@ function Navbar(props) {
     const {store, actions} = useContext(Context);
     const [loginInformation,
         setLoginInformation] = useState({username: "", password: ""})
-    const [spinnerClass, setSpinnerClass] = useState('hidden')
-
+    const [spinnerClass,
+        setSpinnerClass] = useState('hidden')
 
     const loginUser = async() => {
         setSpinnerClass('visible')
@@ -36,10 +36,16 @@ function Navbar(props) {
 
     const handleSearch = (event) => {
         const value = event.target.value;
-        if(!value){ return null }
-        let replaced = value.split(' ').join('-');
-        if(event.key === 'Enter') {
-            props.history.push(`/game_details/${replaced}`)
+        if (!value) {
+            return null
+        }
+        let replaced = value
+            .split(' ')
+            .join('-');
+        if (event.key === 'Enter') {
+            props
+                .history
+                .push(`/game_details/${replaced}`)
         }
     }
 
@@ -47,7 +53,6 @@ function Navbar(props) {
         const loadGenres = `genres=${genre}`
         actions.loadGameData(loadGenres)
     }
-
 
     const loginButtonHandler = () => {
         if (!store.userLogin) {
@@ -73,7 +78,11 @@ function Navbar(props) {
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false">
-                        <FontAwesomeIcon icon={faUserCircle} style={{color:"rgb(255, 255, 255)"}}/>
+                        <FontAwesomeIcon
+                            icon={faUserCircle}
+                            style={{
+                            color: "rgb(255, 255, 255)"
+                        }}/>
                     </Link>
                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                         <Link className="dropdown-item" to={`/profile/${loginInformation.username}`}>
@@ -153,7 +162,9 @@ function Navbar(props) {
                             placeholder="Search"
                             id="search"
                             aria-label="Search"
-                            onKeyDown={(event) => {handleSearch(event)}}/>
+                            onKeyDown={(event) => {
+                            handleSearch(event)
+                        }}/>
                     </form>
                 </div>
             </nav>

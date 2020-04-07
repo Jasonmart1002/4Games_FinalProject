@@ -4,7 +4,7 @@ import Article from "../../Components/Disqus/Disqus";
 import StarRatings from 'react-star-ratings';
 import ReactPlayer from 'react-player';
 import FollowButton from "../../Components/FollowButton/FollowButton";
-import Media from "../../Components/Youtube/Media";
+import Media from "../../Components/Media/Media";
 
 export function GameDetails(props) {
 
@@ -17,7 +17,7 @@ export function GameDetails(props) {
                 <div className="loader_3"></div>
             </div>
         )})
-        
+
     const updateState = (data) => {
         setGame(data)
         if (!data.clip) {
@@ -33,7 +33,7 @@ export function GameDetails(props) {
             controls
             loop
             playing
-            volume={0}/>)}) //set up to 0.002 when finish development
+            volume={0}/>)})
     }
 
     useEffect(() => {
@@ -41,17 +41,18 @@ export function GameDetails(props) {
             .then(response => response.json())
             .then(data => updateState(data))
     }, [gameToSearch]);
-
     return (
         <div className="gameDetailsComponent">
             <div className="gameDetailsMain">
+            <div className="gameDetails_bg_image" style={{backgroundImage: `url(${game.background_image})`}}></div>
+            <div className="gameDetails_bg"></div>
                 <div className="detailsContainer">
                     <div className="leftContainer">
                         <div className="gameDetailsVideo">
                             {userView.contentToDisplay}
                         </div>
                         <div className="gameDetailsFollowButtonContainer">
-                                <Media game_name={game.name}/>
+                                <Media game_name={game.name} game_id={game.id}/>
                                 <FollowButton game_id={game.id} game_name={game.name} />
                         </div>
                         <div className="disqusContainer">

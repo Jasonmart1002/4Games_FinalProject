@@ -1,16 +1,44 @@
-$tablet: "(min-width: 368px) and (max-width: 1170px)";
+$tablet: "(min-width: 68px) and (max-width: 1170px)";
+
+.gameDetails_bg_image {
+    position: absolute;
+    background-size: cover;
+    top: 0;
+    width: 100%;
+    height: 1250px;;
+    z-index: -1;
+}
+@media #{$tablet} {
+    .gameDetails_bg_image {
+        height: 2050px;
+    }
+}
+
+.gameDetails_bg {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 1250px;
+    background-color: rgba(94, 94, 94, 0.459);
+    z-index: -1;
+}
+@media #{$tablet} {
+    .gameDetails_bg {
+        height: 2050px;
+    }
+}
 
 .gameDetailsMain {
     display: flex;
     justify-content: center;
-    margin-top: 52px;
+    margin-top: 152px;
     .detailsContainer {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
         align-items: center;
         width: 70%;
-        min-width: 300px;
+        min-width: 350px;
         max-width: 1040px;
         height: 100%;
         padding: 20px;
