@@ -5,6 +5,7 @@ import {Home} from "../Views/Home/Home";
 import {Profile} from "../Views/Profile/Profile";
 import {GameDetails} from "../Views/GameDetails/GameDetails";
 import {Footer} from "../Components/Footer/Footer";
+// import {Error404} from "../Components/404.js";
 import Navbar from "../Components/Navbar/Navbar";
 import injectContext from "../Store/appContext";
 
