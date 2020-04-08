@@ -5,15 +5,19 @@ import {faBars} from '@fortawesome/free-solid-svg-icons';
 import {faTimesCircle} from '@fortawesome/free-solid-svg-icons';
 import {faUserCircle} from '@fortawesome/free-solid-svg-icons';
 import {Context} from "../../Store/appContext";
+import SearchRecom from "./SearchRecom/SearchRecom";
 import "./Navbar.scss";
+import axios from "axios";
 
 function Navbar(props) {
 
     const {store, actions} = useContext(Context);
     const [loginInformation,
-        setLoginInformation] = useState({username: "", password: ""})
+        setLoginInformation] = useState({username: "", password: ""});
     const [spinnerClass,
-        setSpinnerClass] = useState('hidden')
+        setSpinnerClass] = useState('hidden');
+    const [titlesRecommended,
+        setTitleRecommended] = useState({recommendation: []})
 
     const loginUser = async() => {
         setSpinnerClass('visible')
@@ -21,9 +25,7 @@ function Navbar(props) {
         setSpinnerClass('hidden')
     }
 
-    const logoutUser = () => {
-        actions.logout()
-    }
+    const logoutUser = () => actions.logout()
 
     const handleLogin = () => {
         for (let input in loginInformation) {
@@ -32,21 +34,6 @@ function Navbar(props) {
             }
         }
         loginUser()
-    }
-
-    const handleSearch = (event) => {
-        const value = event.target.value;
-        if (!value) {
-            return null
-        }
-        let replaced = value
-            .split(' ')
-            .join('-');
-        if (event.key === 'Enter') {
-            props
-                .history
-                .push(`/game_details/${replaced}`)
-        }
     }
 
     const loadNewGame = (genre) => {
@@ -95,7 +82,52 @@ function Navbar(props) {
                 </li>
             )
         }
+    }
 
+    const handleSearch = (event) => {
+        const value = event.target.value;
+        if (!value) {
+            return null
+        }
+        let replaced = value
+            .split(' ')
+            .join('-')
+            .toLowerCase();
+        if (event.key === 'Enter') {
+            props
+                .history
+                .push(`/game_details/${replaced}`)
+        }
+    }
+
+    const handleChangeOnSearch = async(event) => {
+        try {
+            const inputCurrentValue = event.target.value;
+            if (inputCurrentValue) {
+                const requestData = await axios.get(`https://api.rawg.io/api/games?search=${inputCurrentValue}`)
+                const arrayOfRequestDataOnlyFiveElements = requestData
+                    .data
+                    .results
+                    .slice(0, 6)
+                setTitleRecommended({
+                    ...titlesRecommended,
+                    recommendation: arrayOfRequestDataOnlyFiveElements
+                })
+            } else {
+                setTitleRecommended({
+                    ...titlesRecommended,
+                    recommendation: []
+                })
+            }
+        } catch (error) {
+            alert("Something went wrong please try again later")
+        }
+    }
+
+    const handleSearchBlur = () => {
+        setTimeout(() => { 
+            setTitleRecommended({recommendation: []})} , 150)
+        
     }
 
     return (
@@ -155,17 +187,29 @@ function Navbar(props) {
                             </NavLink>
                         </li>
                     </ul>
-                    <form className="form-inline my-2 my-lg-0">
-                        <input
-                            className="form-control mr-sm-2"
-                            type="search"
-                            placeholder="Search"
-                            id="search"
-                            aria-label="Search"
-                            onKeyDown={(event) => {
-                            handleSearch(event)
-                        }}/>
-                    </form>
+
+                    <div className="searchContainer">
+                        <form className="form-inline my-2 my-lg-0">
+                            <input
+                                className="form-control mr-sm-2"
+                                type="search"
+                                placeholder="Search"
+                                id="search"
+                                aria-label="Search"
+                                autoComplete="off"
+                                onBlur={handleSearchBlur}
+                                onKeyDown={event => {
+                                handleSearch(event)
+                            }}
+                                onChange={event => {
+                                handleChangeOnSearch(event)
+                            }}/>
+                        </form>
+                        <div className="searchResult">
+                            <SearchRecom gamesRecommended={titlesRecommended.recommendation}/>
+                        </div>
+                    </div>
+
                 </div>
             </nav>
             <div
