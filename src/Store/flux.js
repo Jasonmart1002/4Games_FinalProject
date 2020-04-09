@@ -21,7 +21,7 @@ const getState = ({getStore, getActions, setStore}) => {
 				.catch((error) => alert('Something went wrong try again later'))
             },
 
-            // set up a filter to see if the token still valid
+            // set up a filter to see if the token still valid!
             updateUser: async() => {
                 try {
                     const store = getStore()

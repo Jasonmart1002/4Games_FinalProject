@@ -40,6 +40,7 @@ export function GameDetails(props) {
         fetch(`https://api.rawg.io/api/games/${gameToSearch}`)
             .then(response => response.json())
             .then(data => updateState(data))
+            .catch(error => alert("Something went wrong please try again later"))
     }, [gameToSearch]);
     return (
         <div className="gameDetailsComponent">

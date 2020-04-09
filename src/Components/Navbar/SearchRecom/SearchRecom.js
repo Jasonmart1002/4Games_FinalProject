@@ -10,15 +10,22 @@ function SearchRecom(props) {
         setListOfGames] = useState([])
 
     const {gamesRecommended} = props;
-    console.log(gamesRecommended) 
-
 
     const updateList = (gameRecommendedArr) => {
-        if (!gameRecommendedArr) {return setListOfGames([])}
+        if (!gameRecommendedArr) {
+            return setListOfGames([])
+        }
         const listItems = gameRecommendedArr.map((game, index) => {
 
             let imageToDisplay = <FontAwesomeIcon icon={faSadTear} className="sadIcon"/>
-            if(game.background_image) {imageToDisplay = <img src={game.background_image} className="imageToDisplayOnSearch" width="50px" height="40px" alt={`search result game name ${game.name}`}/>}
+            if (game.background_image) {
+                imageToDisplay = <img
+                    src={game.background_image}
+                    className="imageToDisplayOnSearch"
+                    width="50px"
+                    height="40px"
+                    alt={`search result game name ${game.name}`}/>
+            }
 
             return <Link to={`/game_details/${game.slug}`} key={index} className='gameRecommended'>
                 <div className="searchBarOption">

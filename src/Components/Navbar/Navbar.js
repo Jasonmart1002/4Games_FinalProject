@@ -4,6 +4,9 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faBars} from '@fortawesome/free-solid-svg-icons';
 import {faTimesCircle} from '@fortawesome/free-solid-svg-icons';
 import {faUserCircle} from '@fortawesome/free-solid-svg-icons';
+import {faHome} from '@fortawesome/free-solid-svg-icons';
+import {faSignInAlt} from '@fortawesome/free-solid-svg-icons';
+import {faGamepad} from '@fortawesome/free-solid-svg-icons';
 import {Context} from "../../Store/appContext";
 import SearchRecom from "./SearchRecom/SearchRecom";
 import "./Navbar.scss";
@@ -50,7 +53,7 @@ function Navbar(props) {
                         to="/"
                         data-toggle="modal"
                         data-target="#exampleModalCenter">
-                        Login
+                        <FontAwesomeIcon icon={faSignInAlt} style={{color:"white", fontSize:"20px"}}/>
                     </NavLink>
                 </li>
             )
@@ -72,7 +75,7 @@ function Navbar(props) {
                         }}/>
                     </Link>
                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <Link className="dropdown-item" to={`/profile/${loginInformation.username}`}>
+                        <Link className="dropdown-item" to={`/profile/${loginInformation.username}`} onClick={actions.updateUser}>
                             Profile
                         </Link>
                         <Link className="dropdown-item" to="/" onClick={logoutUser}>
@@ -144,50 +147,51 @@ function Navbar(props) {
                     <FontAwesomeIcon icon={faBars}/>
                 </button>
 
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item">
-                            <NavLink to="/" exact className="nav-link ripple">
-                                Home
-                            </NavLink>
-                        </li>
-                        <li className="nav-item dropdown">
-                            <a
-                                className="nav-link dropdown-toggle ripple"
-                                href="http:#.com"
-                                id="navbarDropdown"
-                                role="button"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                                Genres
-                            </a>
-                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <Link className="dropdown-item" to="/" onClick={() => loadNewGame('action')}>
-                                    Action
-                                </Link>
-                                <Link className="dropdown-item" to="/" onClick={() => loadNewGame('puzzle')}>
-                                    Puzzle
-                                </Link>
-                                <Link className="dropdown-item" to="/" onClick={() => loadNewGame('adventure')}>
-                                    Adventure
-                                </Link>
-                                <Link className="dropdown-item" to="/" onClick={() => loadNewGame('sports')}>
-                                    Sports
-                                </Link>
-                                <Link className="dropdown-item" to="/" onClick={() => loadNewGame('strategy')}>
-                                    Strategy
-                                </Link>
-                            </div>
-                        </li>
-                        {loginButtonHandler()}
-                        <li className={`nav-item ${spinnerClass}`}>
-                            <NavLink to="/" exact className="nav-link ripple">
-                                <div className="loader_2"></div>
-                            </NavLink>
-                        </li>
-                    </ul>
-
+                <div className="collapse navbar-collapse navBarLinkContainer" id="navbarSupportedContent">
+                    <div>
+                        <ul className="navbar-nav mr-auto">
+                            <li className="nav-item">
+                                <NavLink to="/" exact className="nav-link ripple">
+                                    <FontAwesomeIcon icon={faHome} style={{color:"white", fontSize:"20px"}}/>
+                                </NavLink>
+                            </li>
+                            <li className="nav-item dropdown">
+                                <a
+                                    className="nav-link dropdown-toggle ripple"
+                                    href="http:#.com"
+                                    id="navbarDropdown"
+                                    role="button"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <FontAwesomeIcon icon={faGamepad} style={{color:"white", fontSize:"20px"}}/>
+                                </a>
+                                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <Link className="dropdown-item" to="/" onClick={() => loadNewGame('action')}>
+                                        Action
+                                    </Link>
+                                    <Link className="dropdown-item" to="/" onClick={() => loadNewGame('puzzle')}>
+                                        Puzzle
+                                    </Link>
+                                    <Link className="dropdown-item" to="/" onClick={() => loadNewGame('adventure')}>
+                                        Adventure
+                                    </Link>
+                                    <Link className="dropdown-item" to="/" onClick={() => loadNewGame('sports')}>
+                                        Sports
+                                    </Link>
+                                    <Link className="dropdown-item" to="/" onClick={() => loadNewGame('strategy')}>
+                                        Strategy
+                                    </Link>
+                                </div>
+                            </li>
+                            {loginButtonHandler()}
+                            <li className={`nav-item ${spinnerClass}`}>
+                                <NavLink to="/" exact className="nav-link ripple">
+                                    <div className="loader_2"></div>
+                                </NavLink>
+                            </li>
+                        </ul>
+                    </div>
                     <div className="searchContainer">
                         <form className="form-inline my-2 my-lg-0">
                             <input

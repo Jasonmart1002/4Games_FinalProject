@@ -15,8 +15,14 @@ $tablet: "(min-width: 368px) and (max-width: 1170px)";
         border-radius: 30px;
         background-color: rgba(255, 255, 255, 0.363);
         .leftContainer {
+            display: flex;
+            flex-wrap: wrap;
+            position: relative;
+            left: 10px;
             height: 600px;
-            width: 48%;
+            width: 50%;
+            padding: 30px;
+            overflow: scroll;
             border-radius: 12px;
             box-shadow: 0 0 4px black;
             background-color: rgb(255, 255, 255);
@@ -25,34 +31,41 @@ $tablet: "(min-width: 368px) and (max-width: 1170px)";
             .leftContainer {
                 width: 100%;
                 margin-bottom: 26px;
+                left: 0;
             }
         }
         .rightContainer {
+            position: relative;
+            right: 10px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            background-color: white;
+            box-shadow: 0 0 4px black;
+            border-radius: 12px;
             width: 50%;
+            overflow: scroll;
             min-width: 300px;
             height: 600px;
-            .favoriteGame {
+            .userInfo{
                 background-color: white;
                 height: 48%;
                 width: 100%;
+                overflow: scroll;
                 border-radius: 12px;
                 box-shadow: 0 0 4px black;
             }
-            .newRelease {
-                background-color: white;
+            .alert {
                 height: 48%;
                 width: 100%;
-                border-radius: 12px;
-                box-shadow: 0 0 4px black;
+                overflow: scroll;
             }
-
         }
         @media #{$tablet} {
             .rightContainer {
                 width: 100%;
+                bottom: 50px;
+                right: 0;
             }
         }
     }

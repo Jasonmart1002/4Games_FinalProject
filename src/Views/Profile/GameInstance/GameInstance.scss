@@ -1,0 +1,47 @@
+.deleteGameFromFavorites {
+    position: absolute;
+    left: 90px;
+    .deleteIcon {
+        color: red;
+        &:hover {
+            width: 16.7px;
+            height: 16.7px;
+        }
+    }
+    
+}
+.storeIconContainer {
+    display: flex;
+    position: relative;
+    font-size: 13px;
+    font-weight: 600;
+    bottom: 5px;
+    left: 10px;
+    .steamIcon {
+        font-size: 20px;
+        margin-left: 3px;;
+    }
+}
+.deleteGameBg {
+    position: absolute;
+    left: 93px;
+    top:37px;
+    background-color: rgb(255, 255, 255);
+    width: 10px;
+    height: 10px;
+    transition: all 1s ease-in-out;
+}
+
+.gameInstanceContainer {
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    margin-right: 20px;
+    border-radius: 4px;
+    box-shadow: 0 0 3px rgb(110, 110, 110);
+    background-color: rgb(0, 0, 0);
+    &:hover {
+        box-shadow: 0 0 3px black;
+    }
+}
+
