@@ -1,63 +1,90 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState, useEffect} from "react";
 import "./Profile.scss";
 import {Context} from "../../Store/appContext";
-import GameInstance from "./GameInstance/GameInstance"
 import axios from 'axios';
+import GameInstance from "./GameInstance/GameInstance";
+import StoreOptions from "./StoreOptions/StoreOptions";
+import UserInformation from "./UserInformation/UserInformation";
 
 export function Profile(props) {
 
     const {store} = useContext(Context);
-    const {userLogin} = store
+    const {favoriteGameInfo, userLogin} = store;
     const {history} = props
 
-	const [favoriteGameInfo, setFavoriteGameInfo] = useState({favoriteGameData: []})
+    useEffect(() => {
+        if (!userLogin) {
+            history.push('/')
+        }
+    }, [userLogin, history])
 
-    // useEffect(() => {
-    //     if (!userLogin) {
-    //         history.push('/')
-    //     }
-	// },[userLogin, history])
+    const [favoriteGamesToDisplay,
+        setFavoriteGameToDisplay] = useState(
+        <div>Select a game to follow store updates</div>
+    )
+    const [storeDeals,
+        setStoreDeals] = useState({
+        messageToDisplay: <div>Please select a game to search for deals</div>
+    })
 
-	useEffect(() => {
-		const fetchDataOfFavoriteGames = async () => {
-			try {
-				if(userLogin) {
-					const favoriteGameRequestData = []
-					const arrOfFavoriteGames = userLogin.data.favorite_games;
-					for (let game of arrOfFavoriteGames) {
-						const request = await axios.get(`https://api.rawg.io/api/games/${game.game_url_id}`);
-						favoriteGameRequestData.push(request.data)
-					}
-					setFavoriteGameInfo({favoriteGameData: favoriteGameRequestData});
-				}
-			} catch (error) {
-				alert("Something went wrong please try again to log in again");
-				history.push('/')
-			}
-		}
-		fetchDataOfFavoriteGames() 
-	}, [userLogin, history])
+    const fetchStoreData = async(game) => {
+        try {
+            setStoreDeals({spinner: (
+                    <div className="loaderStoreContainer">
+                        <div className="loaderStore"></div>
+                    </div>
+                )})
+            const key = process.env.REACT_APP_IS_THERE_ANY_DEAL;
+            const request = await axios.get(`https://api.isthereanydeal.com/v01/search/search/?key=${key}&q=${game.slug}&limit=20&region=us&country=US&shops=steam,amazonus`)
+            setStoreDeals({gameTitle: game.name, gameBackGround: game.background_image, gameStoreData: request.data.data.list, gameSlug: game.slug});
+        } catch (error) {
+            alert("Something went wrong please try agin later")
+        }
+    }
 
-	const gameToDisplay = favoriteGameInfo.favoriteGameData.map( game => {
-		return <GameInstance />
-	})
+    useEffect(() => {
+        if (favoriteGameInfo.length) {
+            const gameToDisplay = favoriteGameInfo.map(game => {
+                return (
+                    <div key={game.id} onClick={() => fetchStoreData(game)}>
+                        <GameInstance id={game.id} background_img={game.background_image}/>
+                    </div>
+                )
+            })
+            setFavoriteGameToDisplay(gameToDisplay)
+        } else if (userLogin) {
+            if (userLogin.data.favorite_games.length) {
+                setFavoriteGameToDisplay(
+                    <div className="loaderStore"></div>
+                )
+            }
+        }
+    }, [favoriteGameInfo, userLogin])
 
+    let storeDetailsToDisplay = ''
+    if (storeDeals.messageToDisplay) {
+        storeDetailsToDisplay = storeDeals.messageToDisplay
+    } else if (storeDeals.spinner) {
+        storeDetailsToDisplay = storeDeals.spinner
+    } else {
+        storeDetailsToDisplay = <StoreOptions storeDeals={storeDeals}/>
+    }
 
     return (
-		<div className="userProfileMain">
-			<div className="profileContainer">
-				<div className="leftContainer">
-					<GameInstance />
-				</div>
-				<div className="rightContainer">
-					<div className="userInfo">
-						user info
-					</div>
-					<div className="alert">
-						alert
-					</div>
-				</div>
-			</div>
-		</div>
-	)
+        <div className="userProfileMain">
+            <div className="profileContainer">
+                <div className="leftContainer">
+                    {favoriteGamesToDisplay}
+                </div>
+                <div className="rightContainer">
+                    <div className="userInfo">
+                        <UserInformation user={userLogin}/>
+                    </div>
+                    <div className="storeDeals">
+                        {storeDetailsToDisplay}
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
 }

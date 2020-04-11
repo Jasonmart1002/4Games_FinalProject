@@ -25,6 +25,7 @@ function Navbar(props) {
     const loginUser = async() => {
         setSpinnerClass('visible')
         await actions.login(loginInformation)
+        actions.loadFavoriteGameData()
         setSpinnerClass('hidden')
     }
 
@@ -53,7 +54,12 @@ function Navbar(props) {
                         to="/"
                         data-toggle="modal"
                         data-target="#exampleModalCenter">
-                        <FontAwesomeIcon icon={faSignInAlt} style={{color:"white", fontSize:"20px"}}/>
+                        <FontAwesomeIcon
+                            icon={faSignInAlt}
+                            style={{
+                            color: "white",
+                            fontSize: "20px"
+                        }}/>
                     </NavLink>
                 </li>
             )
@@ -75,7 +81,10 @@ function Navbar(props) {
                         }}/>
                     </Link>
                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <Link className="dropdown-item" to={`/profile/${loginInformation.username}`} onClick={actions.updateUser}>
+                        <Link
+                            className="dropdown-item"
+                            to={`/profile/${loginInformation.username}`}
+                            onClick={actions.updateUser}>
                             Profile
                         </Link>
                         <Link className="dropdown-item" to="/" onClick={logoutUser}>
@@ -128,9 +137,10 @@ function Navbar(props) {
     }
 
     const handleSearchBlur = () => {
-        setTimeout(() => { 
-            setTitleRecommended({recommendation: []})} , 150)
-        
+        setTimeout(() => {
+            setTitleRecommended({recommendation: []})
+        }, 150)
+
     }
 
     return (
@@ -147,12 +157,19 @@ function Navbar(props) {
                     <FontAwesomeIcon icon={faBars}/>
                 </button>
 
-                <div className="collapse navbar-collapse navBarLinkContainer" id="navbarSupportedContent">
+                <div
+                    className="collapse navbar-collapse navBarLinkContainer"
+                    id="navbarSupportedContent">
                     <div>
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item">
                                 <NavLink to="/" exact className="nav-link ripple">
-                                    <FontAwesomeIcon icon={faHome} style={{color:"white", fontSize:"20px"}}/>
+                                    <FontAwesomeIcon
+                                        icon={faHome}
+                                        style={{
+                                        color: "white",
+                                        fontSize: "20px"
+                                    }}/>
                                 </NavLink>
                             </li>
                             <li className="nav-item dropdown">
@@ -164,7 +181,12 @@ function Navbar(props) {
                                     data-toggle="dropdown"
                                     aria-haspopup="true"
                                     aria-expanded="false">
-                                    <FontAwesomeIcon icon={faGamepad} style={{color:"white", fontSize:"20px"}}/>
+                                    <FontAwesomeIcon
+                                        icon={faGamepad}
+                                        style={{
+                                        color: "white",
+                                        fontSize: "20px"
+                                    }}/>
                                 </a>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <Link className="dropdown-item" to="/" onClick={() => loadNewGame('action')}>

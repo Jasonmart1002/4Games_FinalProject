@@ -20,7 +20,7 @@ function GameCard(props) {
                 setUserView({...userView,
                     contentToDisplay:(
                         <div className="videoUnavailable">
-                            <FontAwesomeIcon icon={faSadTear} className="sadIcon"/>
+                            <FontAwesomeIcon icon={faSadTear} className="sadIconGameCard"/>
                         </div>
                     )})
             } else {

@@ -8,6 +8,7 @@ const getState = ({getStore, getActions, setStore}) => {
 			userLogin: "",
 			userTokens: "",
             gameData: "",
+            favoriteGameInfo: []
         },
 
         actions: {
@@ -25,13 +26,15 @@ const getState = ({getStore, getActions, setStore}) => {
             updateUser: async() => {
                 try {
                     const store = getStore()
+                    const actions = getActions()
                     const tokens = store.userTokens
                     const header = {Authorization: `Bearer ${tokens.token}`}
                     const requestUserInfo = await axios.get('https://games-api-4geeks.herokuapp.com/user', {headers: header})
-                    setStore({
+                    await setStore({
                         ...store,
                         userLogin: requestUserInfo,
                     })
+                    actions.loadFavoriteGameData()
                 } catch (error) {
                     alert('Something went wrong please try again later')
                 }
@@ -70,10 +73,27 @@ const getState = ({getStore, getActions, setStore}) => {
                 } catch (error) {
                     alert('Something went wrong please try again later')
                 }
+            },
+
+            loadFavoriteGameData: async() => {
+                try {
+                    const store = await getStore()
+                    if (store.userLogin) {
+                        const favoriteGameRequestData = []
+                        const arrOfFavoriteGames = store.userLogin.data.favorite_games;
+                        for (let game of arrOfFavoriteGames) {
+                            const request = await axios.get(`https://api.rawg.io/api/games/${game.game_url_id}`);
+                            favoriteGameRequestData.push(request.data)
+                        }
+                        setStore({
+                            ...store,
+                            favoriteGameInfo: favoriteGameRequestData
+                        })
+                    }
+                } catch (error) {
+                    alert("Something went wrong please try again later");
+                }
             }
-
-
-
         }
     }
 };
